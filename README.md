@@ -32,24 +32,45 @@
 
 ## Business Requirements
 
-As a good friend, you are requested by your friend, who has received an inheritance from a deceased great-grandfather located in Ames, Iowa, to  help in maximising the sales price for the inherited properties.
+The client has inherited four houses located in Ames, Iowa.The client wamts to maximise the sales price for the inherited properties.
 
-Although your friend has an excellent understanding of property prices in her own state and residential area, she fears that basing her estimates for property worth on her current knowledge might lead to inaccurate appraisals. What makes a house desirable and valuable where she comes from might not be the same in Ames, Iowa. She found a public dataset with house prices for Ames, Iowa, and will provide you with that.
+The client fears that basing her estimates for property worth on her current knowledge (i.e. Belgian housing market) might lead to inaccurate appraisals. The client found a public dataset with house prices for Ames, Iowa, and it has been provided with the following objective.
 
 * 1 - The client is interested in discovering how the house attributes correlate with the sale price. Therefore, the client expects data visualisations of the correlated variables against the sale price to show that.
 * 2 - The client is interested in predicting the house sale price from her four inherited houses and any other house in Ames, Iowa.
 
-## Hypothesis and how to validate?
+## ? Hypothesis and how to validate?
 
 * List here your project hypothesis(es) and how you envision validating it (them).
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-* List your business requirements and a rationale to map them to the Data Visualisations and ML tasks.
+- **Business Requirement 1:** Data Visualization and Correlation study
+	- Inspect the data related to the house pricing.
+	- Conduct a correlation study (Pearson and Spearman) / PPS study to understand better how the variables are correlated to Sales Price.
+	- Plot the most correlated variables against Sales Price to visualize insights.
+
+- **Business Requirement 2:** Data Analysis and Regression
+	- Understand what affects the house prices the most (can be one or more variables) among the most correlated variables.
+    - Based on this understanding, create a regression model that predicts the Sales Price for any house in similar neighbourhood.
+    - Use model to predict the Sales Price for four inherited houses.
 
 ## ML Business Case
 
-* In the previous bullet, you potentially visualised an ML task to answer a business requirement. You should frame the business case using the method we covered in the course.
+### Predict Sales Price
+
+- Create an ML model to predict the sales price based on historical data that does not include the sales price. The target variable is numerical. 
+- Consider a **regression model** to begin with. It is a supervised model with best possible combination of algorithm and tuned hyperparameters.
+- Consider changing to classification task if necessary.
+- The ideal outcome is to provide client with reliable insight into sales prices in the given neighbourhood and use that data to price inherited properties.
+- The model success metrics are
+	- at least 0.7 for R2 score, on train and test set 
+	- The ML model is considered a failure if:
+		-  after 12 months of usage, the model's predictions are 50% off more than 30% of the time. Say, a prediction is >50% off if predicted 1,000,000 months and the actual value was 200,000.
+- The model output is defined as continuous value for Sales Price in USD. If the client talks to a salesperson, the client will interview to gather the input data and feed it into the App. Alternatively, since the client owns the property, she can collect data herself and feed into the App. The prediction is made on the fly (not in batches).
+- Heuristics: Currently, the client does not have any approach to predict sales prices in given neighbourhood. The client knows how to predict sales prices in other regions, but feels uncomfortable to use this approach in given neighbourhood.
+- The training data to fit the model comes from the public dataset. This dataset contains about 1.5 thousand records.
+	- Train data - target: Sales Price; features: all other variables, but Sales Price??
 
 ## Dashboard Design
 
