@@ -72,10 +72,37 @@ The client fears that basing her estimates for property worth on her current kno
 - The training data to fit the model comes from the public dataset. This dataset contains about 1.5 thousand records.
 	- Train data - target: Sales Price; features: all other variables, but Sales Price??
 
-## Dashboard Design
+## Dashboard Design (Streamlit App User Interface)
 
 * List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other items that your dashboard library supports.
-* Eventually, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but eventually you needed to use another plot type)
+
+### Page 1: Quick Project Summary
+- Project terms and jargon
+- Describe project dataset
+- State business requirements
+
+### Page 2: Sales Price Study
+- State business requirement 1
+- Checkbox : data inspection on customer base (display the number of rows and cols in the data, and display first 10 rows)
+- Display most correlated variables to sales price
+- Conclusion
+- Checkbox to further drill down on correlated variable with individual focus
+- Checkbox to reveal parallel plot to understand correlated variables better
+
+### Page 3: Sales Price Predictor
+- State business requirement 2
+- Show predicted price for four inherited houses
+- Interactive widget input to house related features to predict sales prices for any given house in related area.
+
+### Page 4: Project Hypothesis and Validation
+
+
+### Page 5: ML Sales prediction
+- Considerations and conclusions after pipeline is trained
+- Present ML pipeline steps
+- Feature importance
+- Pipeline performance
+
 
 ## Unfixed Bugs
 
@@ -119,5 +146,5 @@ The client fears that basing her estimates for property worth on her current kno
 ## Acknowledgements (optional)
 
 
-* In case you would like to thank the people that provided support through this project.
+* Big thank you to my mentor Mr Shami for pushing me and supporting me to complete my project.
 
