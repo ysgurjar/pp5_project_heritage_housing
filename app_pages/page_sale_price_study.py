@@ -13,7 +13,7 @@ import plotly.express as px
 def page_sale_price_study_body():
     """
     Display correlated features and a checkbox to show the show
-    house price per variable.
+    house price per correlated variable.
     """
 
     # Subheader : Business requirement
