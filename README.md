@@ -45,15 +45,9 @@ The client fears that basing her estimates for property worth on her current kno
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-- **Business Requirement 1:** Data Visualization and Correlation study
-	- Inspect the data related to the house pricing.
-	- Conduct a correlation study (Pearson and Spearman) / PPS study to understand better how the variables are correlated to Sales Price.
-	- Plot the most correlated variables against Sales Price to visualize insights.
+1. The client is interested in discovering how the house attributes correlate with the sale price. Therefore, the client expects data visualisations of the correlated variables against the sale price to show that.
 
-- **Business Requirement 2:** Data Analysis and Regression
-	- Understand what affects the house prices the most (can be one or more variables) among the most correlated variables.
-    - Based on this understanding, create a regression model that predicts the Sales Price for any house in similar neighbourhood.
-    - Use model to predict the Sales Price for four inherited houses.
+2. The client is interested in predicting the house sale price from her four inherited houses and any other house in Ames, Iowa.
 
 ## ML Business Case
 
