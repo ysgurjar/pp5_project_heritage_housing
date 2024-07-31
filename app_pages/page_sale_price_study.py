@@ -29,8 +29,13 @@ def page_sale_price_study_body():
     df= load_housing_data()
 
     if(st.checkbox( "Inspect dataset")):
-        st.write(f'The dataset has {df.shape[0]} rows and {df.shape[1]} columns.')
-        st.write("""The last column ```SalePrice``` is our taget variable for finding correlation.""")
+        st.write(f'* The dataset has {df.shape[0]} rows and {df.shape[1]} columns.')
+        st.write("""* The last column ```SalePrice``` is our taget variable for finding correlation.""")
+        st.write("""
+            * Sale Price is in USD and area measurement is in square feet. For additional variable \
+            definition and metadata, refer to the project [ReadMe](https://github.com/ysgurjar/pp5_project_heritage_housing)\
+            on Github.
+            """)
         st.write(df)
 
     # Correlated variables summary
@@ -67,4 +72,13 @@ def page_sale_price_study_body():
         st.write("""The last column ```SalePrice``` is our taget variable for finding correlation.""")
         st.write(df)
     
-    ## ==== Code to generate plots ===
+    ## ==== Code to generate plots ====
+
+    # Create a custom dict to display categories labels instead of names
+
+    var_labels={
+        '1stFlrSF':'1st Floor Square Feet',
+        'GarageArea': 'Garage Area',
+        'GrLiveArea': 'Ground Living Area'
+        ''
+    }
