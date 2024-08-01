@@ -1,2 +1,4 @@
 {
+    "notebook.formatOnSave.enabled": true,
+    "notebook.defaultFormatter": "charliermarsh.ruff"
 }
