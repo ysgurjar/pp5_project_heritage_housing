@@ -1,6 +1,16 @@
+# Project Heritage Housing
+
+The client is instrested to know what governs the property prices in a certain neighbourhood in Iowa.
+This is achieved via correlation analysis predict property prices from surrounding properties and its features.
+
+The client also wants to predict prices in the same neighbourhood.
+This is achieved via ML task and an streamlit app to provide input interface and results.
+
+The live website [link](https://pp5-house-price-prediction-17777932fd9f.herokuapp.com/).
+
 ## Dataset Content
 
-* The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data). We then created a fictitious user story where predictive analytics can be applied in a real project in the workplace.
+* The dataset is publicly available and it is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data). We then created a fictitious user story where predictive analytics can be applied in a real project in the workplace.
 * The dataset has almost 1.5 thousand rows and represents housing records from Ames, Iowa, indicating house profile (Floor Area, Basement, Garage, Kitchen, Lot, Porch, Wood Deck, Year Built) and its respective sale price for houses built between 1872 and 2010.
 
 |Variable|Meaning|Units|
@@ -89,9 +99,6 @@ The client fears that basing her estimates for property worth on her current kno
 - Heuristics: Currently, the client does not have any approach to predict sales prices in given neighbourhood. The client knows how to predict sales prices in other regions, but feels uncomfortable to use this approach in given neighbourhood.
 - The training data to fit the model comes from the public dataset. This dataset contains about 1.5 thousand records.
 
-#### Post regression study conclusions
-
-- The training model 
 
 ## Dashboard Design (Streamlit App User Interface)
 
