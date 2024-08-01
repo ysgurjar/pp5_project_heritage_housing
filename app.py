@@ -11,10 +11,12 @@ from app_pages.page_ml_sale_predict import page_ml_sale_predict_body
 app = MultiPage(app_name= "Sale Price Study") # Create an instance of the app 
 
 # Add your app pages here using .add_page()
-app.add_page("ML : Sale Price Prediction",page_ml_sale_predict_body)
-app.add_page("Sale Price Prediction", page_sale_price_prediction_body)
-app.add_page("Sale Price Correlations",page_sale_price_study_body)
 app.add_page("Quick Project Summary", page_summary_body)
+app.add_page("Sale Price Correlations",page_sale_price_study_body)
 app.add_page("Project Hypothesis",page_project_hypothesis_body)
+app.add_page("Sale Price Prediction", page_sale_price_prediction_body)
+app.add_page("ML : Sale Price Prediction",page_ml_sale_predict_body)
+
+
 
 app.run() # Run the  app
