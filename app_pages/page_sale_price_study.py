@@ -5,7 +5,6 @@ import seaborn as sns
 import ppscore as pps
 
 sns.set_style("whitegrid")
-from feature_engine.discretisation import ArbitraryDiscretiser
 import numpy as np
 import plotly.express as px
 
