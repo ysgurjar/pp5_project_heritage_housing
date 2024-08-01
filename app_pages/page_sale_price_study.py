@@ -3,10 +3,9 @@ from src.data_management import load_housing_data
 import matplotlib.pyplot as plt
 import seaborn as sns
 import ppscore as pps
+import numpy as np
 
 sns.set_style("whitegrid")
-import numpy as np
-import plotly.express as px
 
 
 def page_sale_price_study_body():
@@ -14,7 +13,6 @@ def page_sale_price_study_body():
     Display correlated features and a checkbox to show the show
     house price per correlated variable.
     """
-
     # Subheader : Business requirement
     st.subheader("Business Requirement-1")
     st.info(
@@ -24,7 +22,6 @@ def page_sale_price_study_body():
     )
     # Inspect dataset
     st.subheader("Explore Dataset")
-
     df = load_housing_data()
 
     if st.checkbox("Inspect dataset"):
@@ -56,7 +53,7 @@ def page_sale_price_study_body():
                 - **Total Basement Square Feet** (TotalBsmtSF): Larger the area, higher the price
             - **Quality** :
                 - **Overall Quality** (OverallQual): Better the quality, higher the price
-                - **Garage Finish** (GarageFinish) : Houses finished garages have typically higher prices compare\
+                - **Garage Finish** (GarageFinish) : Houses with finished garages have typically higher prices compare\
                     to unfinished garages
                 - **Kitchen Quality** (KitchenQual): Better the quality, higher the price
             - **Time** :
@@ -128,10 +125,10 @@ def page_sale_price_study_body():
                 p.axvline(x=1950, color="black", linestyle="dashed")
             else:
                 # set robust = True reduce the effect of outliers
-                p = sns.regplot(
-                    data=df, x=x, y="SalePrice", marker="x", robust=True
-                )
-            p.set_title(f"Sale Price vs {var_labels[x]}", fontsize=30)  # Setting title for each plot
+                p = sns.regplot(data=df, x=x, y="SalePrice", marker="x", robust=True)
+            p.set_title(
+                f"Sale Price vs {var_labels[x]}", fontsize=30
+            )  # Setting title for each plot
 
             # set labels
             plt.xlabel(var_labels[x], fontsize=20)  # Optionally set the x-axis label
