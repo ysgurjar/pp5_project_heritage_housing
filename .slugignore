@@ -2,3 +2,4 @@
 __pycache__/  # Exclude Python cache files
 *.DS_Store  # Exclude macOS directory metadata files
 .vscode/  # Exclude Visual Studio Code workspace settings
+docs/
