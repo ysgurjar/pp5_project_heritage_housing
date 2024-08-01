@@ -21,7 +21,9 @@ def page_sale_price_prediction():
         """
     )
     # subheader
-    st.subheader("Estimated sale price for client's inherited houses")
+    st.subheader("Inherited houses - Estimated sale price")
+
+    st.write("The house features and estimated sale price (last column) is listed below.")
 
     # ============ Core ML logic ==============
 
@@ -33,19 +35,19 @@ def page_sale_price_prediction():
         df.drop(["SalePrice"], axis=1), df["SalePrice"], test_size=0.2, random_state=0
     )
 
-    # load the latest ml model pipeline that is optimised
-    version = "v4"
+    # load the latest ml model pipeline that is optimised with only few best features
+    version = "v5"
     ml_pipeline = load_pkl_file(
         f"outputs/ml_pipeline/predict_price/{version}/regression_pipeline.pkl"
     )
-    house_features = pd.read_csv(
-        "outputs/datasets/collection/inherited_houses.csv"
+
+    # load best features from last saved pipeline, i.e. v5's train set
+    best_features = pd.read_csv(
+        "outputs/ml_pipeline/predict_price/v5/X_train.csv"
     ).columns.to_list()
 
-    st.write("Find below 4 inherited houses profile and their estimated sale price")
-
     # Fit and transform to predict
-    ml_pipeline.fit(X_train, y_train)
+    ml_pipeline.fit(X_train[best_features], y_train)
 
     # load raw dataset
     X_inherited_house_data = pd.read_csv(
@@ -53,7 +55,7 @@ def page_sale_price_prediction():
     )
 
     # predict house prices
-    y_predicted_price = ml_pipeline.predict(X_inherited_house_data)
+    y_predicted_price = ml_pipeline.predict(X_inherited_house_data[best_features])
 
     # ==== End of core ML logic ====
 
@@ -74,37 +76,51 @@ def page_sale_price_prediction():
     st.header("Predict house sales prices in Ames, Iowa")
 
     st.write("Let's use our model to predict the price.")
-    st.write("Note that we have only included 4 parameters that affects the model \
-        performance the most as an input")
+
     # == Core logic for live predictions ===
 
-    def run_live_predictions(grLivArea,totalBsmtSF,garageArea,overallQual):
-        
+    def run_live_predictions(grLivArea,totalBsmtSF,garageArea,overallQual,bsmtFinSF1):
+        """Takes house features values as input from widgets
+        and use ML trained model to output estimated price
+
+        Args:
+            grLivArea (int): Ground Living Area SqFt
+            totalBsmtSF (int): Total Basement SqFt
+            garageArea (int): Garage Area SqFt
+            overallQual (int): 1 being very poor, 10 being best
+            bsmtFinSF1 (int): Basement type 1 finish area in SqFt
+        """
         # create an empty dataframe with hold live values
-        df = X_train[0:0].copy()
+        empty_df=X_train[best_features]
+        df = empty_df[0:0].copy()
         
         df.loc[0,'GrLivArea']=grLivArea
         df.loc[0,'TotalBsmtSF']=totalBsmtSF
         df.loc[0,'GarageArea']=garageArea
         df.loc[0,'OverallQual']= overallQual
-
+        df.loc[0,'BsmtFinSF1']= bsmtFinSF1
         live_predict_y=ml_pipeline.predict(df)
 
-        st.success(f'{live_predict_y}')
-
+        st.write("Prediction resullts for given input data")
+        st.dataframe(df)
+        st.success(f'Estimated price : {int(live_predict_y[0])} USD')
+        
 
 
     with st.form(key="input data"):
-        col1, col2, col3 = st.beta_columns(3)
+        col1, col2 = st.beta_columns(2)
+        col3, col4 = st.beta_columns(2)
 
         with col1:
-            grLivArea=st.number_input("Above Ground Living Area (SqFt)",key="GrLivArea", min_value=0, max_value=6000)
+            grLivArea=st.number_input("Above Ground Living Area (SqFt)",key="GrLivArea", min_value=0, max_value=6000, step=50)
         with col2:
-            totalBsmtSF=st.number_input("Total Basement Area (SqFt)", key="TotalBsmtSF", min_value=0, max_value=6000)
-
+            totalBsmtSF=st.number_input("Total Basement Area (SqFt)", key="TotalBsmtSF", min_value=0, max_value=6000, step=50)
         with col3:
-            garageArea=st.number_input("Garage Area (SqFt)",key="GarageArea", min_value=0, max_value=6000)
+            garageArea=st.number_input("Garage Area (SqFt)",key="GarageArea", min_value=0, max_value=6000, step=50)
         
+        with col4:
+            bsmtFinSF1=st.number_input("Basement Type 1 finished (SqFt)",key="BsmtFinSF1", min_value=0, max_value=6000, step=50)
+
         overallQual=st.select_slider("Overall Quality", options= [1,2,3,4,5,6,7,8,9,10])
         
         # form submit button
@@ -112,7 +128,7 @@ def page_sale_price_prediction():
 
         # result display button
         if (submitted):
-            run_live_predictions(grLivArea,totalBsmtSF,garageArea,overallQual)
+            run_live_predictions(grLivArea,totalBsmtSF,garageArea,overallQual,bsmtFinSF1)
     
 
 
