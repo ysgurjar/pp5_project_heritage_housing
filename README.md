@@ -1,10 +1,10 @@
 # Project Heritage Housing
 
 The client is instrested to know what governs the property prices in a certain neighbourhood in Iowa.
-This is achieved via correlation analysis predict property prices from surrounding properties and its features.
+This is achieved via correlation analysis.
 
 The client also wants to predict prices in the same neighbourhood.
-This is achieved via ML task and an streamlit app to provide input interface and results.
+This is achieved via regression supervised machine learning task and an streamlit app to provide input interface and results.
 
 The live website [link](https://pp5-house-price-prediction-17777932fd9f.herokuapp.com/).
 
@@ -138,12 +138,6 @@ State business requirement 1
     
     - Garage Area (GarageArea)
 
-<details>
-<summary>Results : Final page design screenshot including all info </summary>
-
-![page 2](docs/images/page_02_sale_price_correlation.png)
-</details>
-
 **Predictive Power Score**
 
 PPS study shows that the following variables are moderate predictor of Sales Price
@@ -161,6 +155,12 @@ PPS study shows that the following variables are moderate predictor of Sales Pri
 	- The higher the quality of a basement finish, the higher the sale price.
 
 	- House prices are relatively flat upto 1950. After that, newer the house, the higher the sales price is.
+
+<details>
+<summary>Results : Final page design screenshot including all info </summary>
+
+![page 2](docs/images/page_02_sale_price_correlation.png)
+</details>
 
 ### Page 3: Sales Price Predictor
 - State business requirement 2
@@ -191,14 +191,33 @@ PPS study shows that the following variables are moderate predictor of Sales Pri
 
  **Pipeline**                                 	| **Version** 	| Mean R2  (Train) 	| Mean R2  (Test) 	| delta R2 	|
 |----------------------------------------------	|-------------	|------------------	|-----------------	|----------	|
-| gradientboost with default hyper param       	| v1          	| 0.94             	| 0.81            	| 0.13     	|
-| parameter optimised                          	| v2          	| 0.91             	| 0.81            	| 0.10     	|
-| additional feature selelection pipeline step 	| v3          	| 0.83             	| 0.76            	| 0.7      	|
-| feature selection optimised                  	| v4          	| 0.87             	| 0.79            	| 0.8      	|
-| rewrite PL with only selected input features  	| v5          	| 0.87             	| 0.79            	| 0.8      	|
+| Gradientboost with default hyperparameters    	| v1          	| 0.94             	| 0.81            	| 0.13     	|
+| Parameters optimised                          	| v2          	| 0.91             	| 0.81            	| 0.10     	|
+| Additional feature selelection pipeline step 	| v3          	| 0.83             	| 0.76            	| 0.7      	|
+| Feature selection optimised                  	| v4          	| 0.87             	| 0.79            	| 0.8      	|
+| Rewrite PL with only selected input features  	| v5          	| 0.87             	| 0.79            	| 0.8      	|
+
+- After rewriting the pipeline, the simplified pipeline has the
+following steps.
+
+- PS : There is no performance drop between v4 and v5 version, just a complexity drop.
+
+- **Final pipeline**
+```python
+Pipeline(steps=[('Winsoriser_iqr',
+                 Winsorizer(capping_method='iqr', tail='both',
+                            variables=['GarageArea', 'GrLivArea',
+                                       'TotalBsmtSF'])),
+                ('feat_scaling', StandardScaler()),
+                ('model',
+                 GradientBoostingRegressor(min_samples_leaf=50,
+                                           n_estimators=140, random_state=0))])
+
+```
 
 ### Page 4: Project Hypothesis and Validation
-- The client did not present any hypothesis upfront, but after discussion the client informed us that she will expect higher price for properties with larger built up area. So, that formed the basis for our hypothesis.
+- The client did not
+ present any hypothesis upfront, but after discussion the client informed us that she will expect higher price for properties with larger built up area. So, that formed the basis for our hypothesis.
 
 - This hypothesis is Correct.
 
