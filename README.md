@@ -68,12 +68,14 @@ The client fears that basing her estimates for property worth on her current kno
 
 ## Dashboard Design (Streamlit App User Interface)
 
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other items that your dashboard library supports.
+
 
 ### Page 1: Quick Project Summary
 - Project terms and jargon
 - Describe project dataset
 - State business requirements
+
+
 
 ### Page 2: Sales Price Study
 - State business requirement 1
@@ -88,8 +90,33 @@ The client fears that basing her estimates for property worth on her current kno
 - Show predicted price for four inherited houses
 - Interactive widget input to house related features to predict sales prices for any given house in related area.
 
-### Page 4: Project Hypothesis and Validation
+<details>
+<summary>Final page design screenshot including all info </summary>
 
+![page 3](docs/images/page_04_sale_price_prediction.png)
+
+</details>
+
+### Page 4: Project Hypothesis and Validation
+- The client did not present any hypothesis upfront, but after discussion the client informed us that she will expect higher price for properties with larger built up area. So, that formed the basis for our hypothesis.
+
+- This hypothesis is Correct.
+
+- Pearson correlation, which accounts for linear relation shows 0.6 to 0.7 score between sale price and
+	- Above Ground Living Area (GrLivArea)
+	- Total square feet of Basement Area (TotalBsmtSF)
+	- 1st floor square feet (1stFlrSF)
+	- Garage Area (GarageArea)
+Additionally, ML algorithm with performance R2 score greater than 0.7 also idetified GrLivArea and Garage Area to be two of the top 5 parameters affecting sale price.
+
+This evidence is statastically significant to say that the hypothesis is correct.
+
+<details>
+<summary>Final page design screenshot including all info </summary>
+
+![page 4](docs/images/page_04_sale_price_prediction.png)
+
+</details>
 
 ### Page 5: ML Sales prediction
 - Considerations and conclusions after pipeline is trained
@@ -97,6 +124,12 @@ The client fears that basing her estimates for property worth on her current kno
 - Feature importance
 - Pipeline performance
 
+<details>
+<summary>Final page design screenshot including all info </summary>
+
+![page 5](docs/images/page_05_ml_sale_price_prediction.png)
+
+</details>
 
 ## Unfixed Bugs
 
