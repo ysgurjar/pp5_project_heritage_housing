@@ -5,7 +5,7 @@ from src.data_management import load_housing_data, load_pkl_file
 from sklearn.model_selection import train_test_split
 
 
-def page_sale_price_prediction():
+def page_sale_price_prediction_body():
     """
     Displays sale price prediction for inherited
     as well as property with any given feautures in Iowa
