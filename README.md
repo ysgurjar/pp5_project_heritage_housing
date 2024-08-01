@@ -30,6 +30,14 @@
 |YearRemodAdd|Remodel date (same as construction date if no remodelling or additions)|1950 - 2010|
 |SalePrice|Sale Price|34900 - 755000|
 
+## Project Terms and Jargon
+
+- Sales price of a house refers to the current market price, in US dollars, of a house with with various attributes.
+
+- Inherited house is a house that the client inherited from grandparents.
+
+- Summed price is the total of the predicted sales prices of the four inherited houses.
+
 ## Business Requirements
 
 The client has inherited four houses located in Ames, Iowa.The client wamts to maximise the sales price for the inherited properties.
@@ -39,9 +47,25 @@ The client fears that basing her estimates for property worth on her current kno
 * 1 - The client is interested in discovering how the house attributes correlate with the sale price. Therefore, the client expects data visualisations of the correlated variables against the sale price to show that.
 * 2 - The client is interested in predicting the house sale price from her four inherited houses and any other house in Ames, Iowa.
 
-## ? Hypothesis and how to validate?
+**User Stories**
 
-* List here your project hypothesis(es) and how you envision validating it (them).
+- As a client, I want to know correlation study results, so that I can look at it and study it to understand what drives the house prices in Iowa.
+
+- As a client, as a part of correlation study I want to be able to see trends in graph to strengthen my understanding.
+
+- As a client, I want to use that understanding as an input to get estimatated sale price for four inherited properties.
+
+- As a client, however I do not want to limit my prediction to just four houses. I want to be able to predict prices for any house in Iowa, given neighbourhood.
+
+- As a client, I want an interface to input house attributes so that I can get prediction.
+
+- As a client, I want to know the logic used to create prediction model so that I can have a technical discussion about it.
+
+- As a client, I want to have a proof of model steps, training and performance so that I can have a technical discussion about it.
+
+## Hypothesis and how to validate
+
+* The client did not present any hypothesis upfront, but through the discussion revealed that she expects higheer sale prices for a property with larger built up area. So, that will form basis for our hypothesis
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
@@ -53,56 +77,126 @@ The client fears that basing her estimates for property worth on her current kno
 
 ### Predict Sales Price
 
-- Create an ML model to predict the sales price based on historical data that does not include the sales price. The target variable is numerical. 
+- Create at least one  ML model to predict the sales price based on historical data that does not include the sales price. The target variable is numerical. 
 - Consider a **regression model** to begin with. It is a supervised model with best possible combination of algorithm and tuned hyperparameters.
 - Consider changing to classification task if necessary.
 - The ideal outcome is to provide client with reliable insight into sales prices in the given neighbourhood and use that data to price inherited properties.
 - The model success metrics are
-	- at least 0.7 for R2 score, on train and test set 
+	- **At least 0.7 for R2 score, on train and test set** 
 	- The ML model is considered a failure if:
 		-  after 12 months of usage, the model's predictions are 50% off more than 30% of the time. Say, a prediction is >50% off if predicted 1,000,000 months and the actual value was 200,000.
 - The model output is defined as continuous value for Sales Price in USD. If the client talks to a salesperson, the client will interview to gather the input data and feed it into the App. Alternatively, since the client owns the property, she can collect data herself and feed into the App. The prediction is made on the fly (not in batches).
 - Heuristics: Currently, the client does not have any approach to predict sales prices in given neighbourhood. The client knows how to predict sales prices in other regions, but feels uncomfortable to use this approach in given neighbourhood.
 - The training data to fit the model comes from the public dataset. This dataset contains about 1.5 thousand records.
-	- Train data - target: Sales Price; features: all other variables, but Sales Price??
+
+#### Post regression study conclusions
+
+- The training model 
 
 ## Dashboard Design (Streamlit App User Interface)
-
-
 
 ### Page 1: Quick Project Summary
 - Project terms and jargon
 - Describe project dataset
 - State business requirements
 
+<details>
+<summary>Results : Final page design screenshot including all info </summary>
 
+![page 1](docs/images/page_01_quick_project_summray.png)
+
+</details>
 
 ### Page 2: Sales Price Study
-- State business requirement 1
+
+State business requirement 1
+
 - Checkbox : data inspection on customer base (display the number of rows and cols in the data, and display first 10 rows)
 - Display most correlated variables to sales price
 - Conclusion
 - Checkbox to further drill down on correlated variable with individual focus
-- Checkbox to reveal parallel plot to understand correlated variables better
+- For categorical variables, use box plot and for numerical, use scatter plot with regression line
+
+- Related jupyter notebook : [Sale Price Study](jupyter_notebooks/02.sale_price_study.ipynb)
+
+### Findings
+
+ Person and Spearman Correlation shows good correlation (greater than 0.6) between Sales Price and
+
+    - Above Ground Living Area (GrLivArea)
+
+    - Total square feet of Basement Area (TotalBsmtSF)
+
+    - 1st floor square feet (1stFlrSF)
+    
+    - Garage Area (GarageArea)
+
+<details>
+<summary>Results : Final page design screenshot including all info </summary>
+
+![page 2](docs/images/page_02_sale_price_correlation.png)
+</details>
+
+**Predictive Power Score**
+
+PPS study shows that the following variables are moderate predictor of Sales Price
+
+```['GarageArea','GarageFinish','KitchenQual','YearBuilt']```.
+
+```OverallQual``` have better predicting power and boxplot shows it clearly that a good overall quality increases the price of the property.
+
+**Consise summary for stakeholders**
+
+	- Typically, the larger the house built-up area, the higher the sale price. It matters more than lot size. 
+
+	- House features such as a basement, first floor and garage add value to the house.
+
+	- The higher the quality of a basement finish, the higher the sale price.
+
+	- House prices are relatively flat upto 1950. After that, newer the house, the higher the sales price is.
 
 ### Page 3: Sales Price Predictor
 - State business requirement 2
 - Show predicted price for four inherited houses
 - Interactive widget input to house related features to predict sales prices for any given house in related area.
-
+- Related Jupyter notebooks
+	- [data_cleaning.ipynb.ipynb](jupyter_notebooks/01.data_collection.ipynb)
+	- [feature_engineering.ipynb](jupyter_notebooks/04.feature_engineering.ipynb)
+	- [modelling_and_evaluation.ipynb](jupyter_notebooks/05.modelling_and_evaluation.ipynb)
+	- [Inherited_houses_price_prediction.ipynb](jupyter_notebooks/06.Inherited_houses_price_prediction.ipynb)
+ 
 <details>
-<summary>Final page design screenshot including all info </summary>
+<summary>Results : Final page design screenshot including all info </summary>
 
-![page 3](docs/images/page_04_sale_price_prediction.png)
+![page 3](docs/images/page_03_sale_price_prediction.png)
 
 </details>
+
+**Consise summary for stakeholders**
+
+	* Gradient boosting is the most efficient algorithm.
+
+	*The train set and test set R2 score is 0.87 and 0.79. The passes the critera of R2 score of 0.7 and above. An attempt has been made to reduce overfitting (reduce delta R2)
+
+	* The most imporatant features are Overall quality, finishing level of basement,size of Basement, above ground living area and total basement area in square feet.
+
+	* Hypothesis - bigger than property higher the price - Ture
+
+ **Pipeline**                                 	| **Version** 	| Mean R2  (Train) 	| Mean R2  (Test) 	| delta R2 	|
+|----------------------------------------------	|-------------	|------------------	|-----------------	|----------	|
+| gradientboost with default hyper param       	| v1          	| 0.94             	| 0.81            	| 0.13     	|
+| parameter optimised                          	| v2          	| 0.91             	| 0.81            	| 0.10     	|
+| additional feature selelection pipeline step 	| v3          	| 0.83             	| 0.76            	| 0.7      	|
+| feature selection optimised                  	| v4          	| 0.87             	| 0.79            	| 0.8      	|
+| rewrite PL with only selected input features  	| v5          	| 0.87             	| 0.79            	| 0.8      	|
 
 ### Page 4: Project Hypothesis and Validation
 - The client did not present any hypothesis upfront, but after discussion the client informed us that she will expect higher price for properties with larger built up area. So, that formed the basis for our hypothesis.
 
 - This hypothesis is Correct.
 
-- Pearson correlation, which accounts for linear relation shows 0.6 to 0.7 score between sale price and
+-Pearson correlation, which accounts for linear relation shows 0.6 to 0.7 score between sale price and
+	
 	- Above Ground Living Area (GrLivArea)
 	- Total square feet of Basement Area (TotalBsmtSF)
 	- 1st floor square feet (1stFlrSF)
@@ -112,9 +206,9 @@ Additionally, ML algorithm with performance R2 score greater than 0.7 also ideti
 This evidence is statastically significant to say that the hypothesis is correct.
 
 <details>
-<summary>Final page design screenshot including all info </summary>
+<summary>Results : Final page design screenshot including all info </summary>
 
-![page 4](docs/images/page_04_sale_price_prediction.png)
+![page 4](docs/images/page_04_project_hypothesis.png)
 
 </details>
 
@@ -125,7 +219,7 @@ This evidence is statastically significant to say that the hypothesis is correct
 - Pipeline performance
 
 <details>
-<summary>Final page design screenshot including all info </summary>
+<summary>Results : Final page design screenshot including all info </summary>
 
 ![page 5](docs/images/page_05_ml_sale_price_prediction.png)
 
