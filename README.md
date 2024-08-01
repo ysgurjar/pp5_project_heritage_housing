@@ -100,13 +100,13 @@ The client fears that basing her estimates for property worth on her current kno
 
 ## Unfixed Bugs
 
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not valid reason to leave bugs unfixed.
+* No known unfixed bugs present at the moment.
 
 ## Deployment
 
 ### Heroku
 
-* The App live link is: <https://YOUR_APP_NAME.herokuapp.com/>
+* The App live [link](https://pp5-house-price-prediction-17777932fd9f.herokuapp.com/).
 * Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
 * The project was deployed to Heroku using the following steps.
 
@@ -119,23 +119,20 @@ The client fears that basing her estimates for property worth on her current kno
 
 ## Main Data Analysis and Machine Learning Libraries
 
-* Here you should list the libraries you used in the project and provide example(s) of how you used these libraries.
+* Pandas : Primarily to read, write and save daframes
+* Numpy : To generate random numbers
+* Matplotlib and Seaborn : To generate plots
+* pandas-profiling : generate industry standard profile report on variables
+* ppscore : To fine correlations between variables
+* feature-engine : for data cleaning, missing data imputation and transformers
+* scikit learn : Cross validation and hyperparameter optmisiation.
 
 ## Credits
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism.
-* You can break the credits section up into Content and Media, depending on what you have included in your project.
+* The code to perform GridSearchCV, Custom Regression plots and Hyper parameter optmisations are taken from SciKit learn Notebook 9 and Walkthrough project.
 
-### Content
+* The outline of this documentation was taken from the accompanying (to the project) code repository provided by the Code Institute.
 
-* The text for the Home page was taken from Wikipedia Article A
-* Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-* The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
-
-### Media
-
-* The photos used on the home and sign-up page are from This Open Source site
-* The images used for the gallery page were taken from this other open-source site
 
 ## Acknowledgements (optional)
 
