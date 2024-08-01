@@ -23,7 +23,7 @@ def page_sale_price_prediction():
     # subheader
     st.subheader("Inherited houses - Estimated sale price")
 
-    st.write("The house features and estimated sale price (last column) is listed below.")
+    st.write("The house features and estimated sale price in USD (last column) is listed below.")
 
     # ============ Core ML logic ==============
 
